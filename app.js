@@ -8,19 +8,29 @@ $(window).on('scroll', function() {
 
     sections.each(function() {
         let top = $(this).offset().top - nav_height,
-            bottom = top + $(this).outerHeight()-50;
+            bottom = top + $(this).outerHeight() - 50;
 
         if (cur_pos >= top && cur_pos <= bottom) {
             nav.find('a').removeClass('active');
             nav.find('a[href="#' + $(this).attr('id') + '"]').addClass('active');
-            if ($(this).attr('id') > 1) {
-                $('nav').addClass('scrolled-nav');
-            } else {
-                $('nav').removeClass('scrolled-nav');
-            }
+            $(this).attr('id') > 1?$('nav').addClass('scrolled-nav'): $('nav').removeClass('scrolled-nav');
         }
     });
+
+    function showText(x) {
+        if (x.matches && pageYOffset > 700) { // If media query matches
+            $('#text').hide();
+             pageYOffset > 1350?$('#slide-btn').hide():false;
+        } else {
+            $('#text').show();
+            $('#slide-btn').show();
+        }
+    }
+    var x = window.matchMedia("(max-width: 991px)")
+    showText(x) // Call listener function at run time
+    x.addListener(showText)
 });
+
 ///////////////////HIGHLIGHT MENU ON CLICK//////////////////
 nav.find('a').on('click', function() {
     let $el = $(this),
@@ -35,6 +45,9 @@ nav.find('a').on('click', function() {
 $('#toggle-btn').on('click', function() {
     $('nav ul').toggleClass('active');
     $('#toggle-btn').toggleClass('menu-toggle_active');
+    $('#text').fadeToggle("1000");
+    $('#slide-btn').fadeToggle("1000");
+    //$('#text').toggleClass('text-toogle');
 })
 ///////////////////TYPE WRITER/////////////////////
 let i = 0;
@@ -49,9 +62,10 @@ function typeWriter() {
     }
 }
 ///////////////////SLIDE BUTTON////////////////////
-$("#slide-btn").on('click',function() {
+$("#slide-btn").on('click', function() {
     $('html,body').animate({
-        scrollTop: $("#2").offset().top-50},
+            scrollTop: $("#2").offset().top - 50
+        },
         'slow');
 });
 /////////////////////////////////////////////

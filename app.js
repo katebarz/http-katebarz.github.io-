@@ -1,7 +1,6 @@
 function resizeToMinimum(){
   var minimum    = [640, 480];
   var current    = [window.outerWidth, window.outerHeight];
-  console.log(current)
   var restricted = [];
   var i          = 2;
 

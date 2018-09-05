@@ -3,6 +3,7 @@
 body {
     margin: 0;
     font-family: 'Open Sans', sans-serif;
+    min-width: 600px;
 }
 
 #particles-js {
@@ -33,6 +34,27 @@ body {
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -89,40 +111,115 @@ nav {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* Headings */
 
 h1 {
-    text-align:center;
+    text-align: center;
     font-size: 5rem;
     color: #34495E;
     margin: 0!important;
     padding: 10px;
 }
-.section-about{
+
+.section-about {
     background: #f0eceb!important;
-}
-.about-me>* {
-    border: 1px solid black;
+    .about-me>* {
+        border: 1px solid black;
+    }
 }
 
 .photo {
     grid-area: photo;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url(photo.jpg);
+    background-size: contain;
 }
 
 .about {
     grid-area: about;
 }
 
-.sidebar {
-    grid-area: sidebar;
-}
 .about-me {
     display: grid;
     grid-gap: 20px;
-    grid-template-rows: 200px;
+    grid-template-rows: 300px;
     grid-template-columns: 120px 1fr 2fr 120px;
-    grid-template-areas: "sidebar photo  about";
-    grid-column-start: 2;
+    grid-template-areas: ". photo  about .";
+}
+
+.section-skills {
+    background-color: #9fa8a3 !important;
+    h1 {
+        color: white;
+    }
+    .block-skills {
+        display: grid;
+    }
+    .skills {
+        display: inline-grid;
+        justify-self: center;
+        margin-top: 2%;
+        grid-gap: 20px;
+        grid-template-rows: repeat(2, 150px);
+        grid-template-columns: repeat(4, 150px);
+    }
+    .wrap {
+        grid-gap: 20px;
+        color: white;
+        width: 100%;
+        height: 100%;
+        position: relative;
+        perspective: 300px;
+        .front {
+            background-color: #3b3a36;
+        }
+        .back {
+            background-color: #173e43;
+            transform: rotateY(180deg);
+        }
+        .front,
+        .back {
+            border-radius: 5px;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+            display: grid;
+            text-align: center;
+            align-items: center;
+            transition: .6s;
+            backface-visibility: hidden;
+        }
+    }
+    .wrap:hover .front {
+        transform: rotateY(180deg);
+    }
+    .wrap:hover .back {
+        transform: rotateY(360deg);
+    }
 }
 
 
@@ -147,8 +244,11 @@ section:nth-child(odd) {
 
 
 
+
+
 /* media */
-@media (max-width: 991px) {
+
+@media screen and (max-device-width: 480px) {
     #particles-js {
         #text {
             font-size: 40px;
@@ -157,7 +257,6 @@ section:nth-child(odd) {
             font-size: 50px;
         }
     }
-
     .menu-toggle {
         display: block;
         cursor: pointer;
@@ -177,7 +276,6 @@ section:nth-child(odd) {
             }
         }
     }
-
     .menu-toggle_active span:first-child {
         transform: rotate(-45deg);
     }
@@ -221,12 +319,45 @@ section:nth-child(odd) {
             }
         }
     }
+    .section-about {
+        .about-me {
+            grid-template-rows: repeat(2, 500px); //grid-template-columns: 20px 1fr 20px 20px;
+            grid-template-areas: "photo photo photo photo" "about about about about";
+        }
+    }
+    .section-skills {
+        .skills {
+            grid-template-rows: repeat(4, 350px);
+            grid-template-columns: repeat(2, 350px);
+        }
+    }
+}
+
+@media screen and (min-device-width: 481px) and (max-device-width: 992px)  {
     .about-me {
         display: grid;
-        grid-gap: 10px;
-        grid-template-rows: repeat(2, 200px);
-        grid-template-columns: 20px auto 20px;
-        grid-template-areas: "sidebar photo" "sidebar about";
-        grid-column-start: 2;
+        grid-gap: 20px;
+        grid-template-rows: 200px;
+        grid-template-columns: 10px 1fr 2fr 10px;
+    }
+    .section-skills {
+        .skills {
+            grid-template-rows: repeat(3, 250px);
+            grid-template-columns: repeat(3, 250px);
+        }
+    }
+}
+@media screen and (max-width: 992px){
+
+    .about-me {
+        display: grid;
+        grid-gap: 20px;
+        grid-template-rows: 200px;
+        grid-template-columns: 10px 1fr 2fr 10px;
+    }
+        .section-skills {
+        .skills {
+grid-auto-columns: auto;
+        }
     }
 }
